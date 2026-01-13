@@ -1,0 +1,27 @@
+name: Deploy Application
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Create .env file
+      run: |
+        echo "POSTGRES_DB=${{ secrets.POSTGRES_DB }}" > .env
+        echo "POSTGRES_USER=${{ secrets.POSTGRES_USER }}" >> .env
+        echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> .env
+        # Добавьте другие переменные окружения по необходимости
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Deploy with Docker Compose
+      run: |
+        docker-compose up -d --build
