@@ -73,6 +73,9 @@ python -m src.main
 }
 ```
 
+### Пример запроса из задания и ответ (получены через Swagger):
+![img.png](images/swagger_post_calc_endpoint_example.png)
+
 ## Database
 
 ### SQL-запрос, который возвращает 10 последних расчётов отсортированных по дате
